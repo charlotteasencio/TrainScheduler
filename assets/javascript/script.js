@@ -12,18 +12,18 @@
 
 var database = firebase.database();
   
-  // 2. Button for adding Employees
+  // 2. Button for adding trains
 $("#add-train-btn").on("click", function(event) {
     event.preventDefault();
-  
-    // Grabs user input
+
+
+  //capture user input
     var trainName = $("#train-name-input").val().trim();
     var trainDestination = $("#destination-input").val().trim();
     var trainFirst = $("#first-train").val().trim();
     var trainFrequency = $("#frequency-input").val().trim();
-    
-  
-    // Creates local "temporary" object for holding employee data
+ 
+//var to store new data
     var newTrain = {
       name: trainName,
       destination: trainDestination,
@@ -31,28 +31,27 @@ $("#add-train-btn").on("click", function(event) {
       frequency: trainFrequency
     };
   
-    // Uploads employee data to the database
+//upload to database
     database.ref().push(newTrain);
-  
-    // Logs everything to console
+
     console.log(newTrain.name);
     console.log(newTrain.destination);
     console.log(newTrain.firstTime);
     console.log(newTrain.frequency);
   
-    // Clears all of the text-boxes
+//clear
     $("#train-name-input").val("");
     $("#destination-input").val("");
     $("#first-train").val("");
     $("#frequency-input").val("");
   });
   
-  // 3. Create Firebase event for adding employee to the database and a row in the html when a user adds an entry
+
   database.ref().on("child_added", function(childSnapshot, prevChildKey) {
   
     console.log(childSnapshot.val());
   
-    // Store everything into a variable.
+
     var trainName = childSnapshot.val().name;
     var trainDestination = childSnapshot.val().destination;
     var trainFirst = childSnapshot.val().firstTime;
@@ -64,6 +63,8 @@ $("#add-train-btn").on("click", function(event) {
     console.log(trainFirst);
     console.log(trainFrequency);
 
+
+//calculating and converting formats of minutes away and next arrival
     var firstTimeConverted = moment(trainFirst, "HH:mm").subtract(1, "years");
 
     var currentTime = moment();
