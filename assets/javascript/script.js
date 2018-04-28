@@ -21,6 +21,7 @@ $("#add-train-btn").on("click", function(event) {
     var trainDestination = $("#destination-input").val().trim();
     var trainFirst = $("#first-train").val().trim();
     var trainFrequency = $("#frequency-input").val().trim();
+    
   
     // Creates local "temporary" object for holding employee data
     var newTrain = {
@@ -62,9 +63,25 @@ $("#add-train-btn").on("click", function(event) {
     console.log(trainDestination);
     console.log(trainFirst);
     console.log(trainFrequency);
-  
+
+    var firstTimeConverted = moment(trainFirst, "HH:mm").subtract(1, "years");
+
+    var currentTime = moment();
+
+    var differenceTime = moment().diff(moment(firstTimeConverted), "minutes");
+
+    var remainder = differenceTime % trainFrequency;
+
+    var minutesAway = trainFrequency - remainder;
+
+
+    var nextTrain = moment().add(minutesAway, "minutes");
+
+    var convertNextTrain = (nextTrain).format("hh:mm A");
+
+
     // Add each train's data into the table
     $("#train-table > tbody").append("<tr><td>" + trainName + "</td><td>" + trainDestination + "</td><td>" +
-    trainFrequency + "</td><td>" + "nextarrival" + "</td><td>" + "minutesaway" + "</td><td>");
+    trainFrequency + "</td><td>" + convertNextTrain + "</td><td>" + minutesAway + "</td><td>");
   });
   

@@ -1,0 +1,33 @@
+body{
+    box-sizing: border-box;
+}
+
+.jumbotron{
+    margin-top: 20px;
+    background-color: darkgoldenrod;
+    color: #3a4045;
+}
+
+label{
+    margin: 0 10px;
+}
+
+form{
+    padding: 10px;
+}
+
+#panel1{
+    background-color: #3a4045;
+    color: white;
+}
+
+#panel2{
+    background-color: #3a4045;
+    color: white;
+}
+
+#add-train-btn{
+    background-color: #3a4045;
+    color: white;
+    border: none;
+}
